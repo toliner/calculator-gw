@@ -1,10 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Main">
-   <children>
-      <JFXButton layoutX="194.0" layoutY="149.0" mnemonicParsing="false" text="Button" />
-   </children>
+<AnchorPane prefHeight="600.0" prefWidth="480.0" style="-fx-background-color: #1F1F1F;" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dev.toliner.calcgw.MainView">
+
+    <VBox fx:id="baseVBox" alignment="TOP_RIGHT" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
+        <Label fx:id="answerLabel" alignment="CENTER_RIGHT" text="0000000000">
+            <font>
+                <Font size="72.0" />
+            </font>
+         <VBox.margin>
+            <Insets bottom="20.0" top="20.0" />
+         </VBox.margin>
+        </Label>
+        <HBox fx:id="buttonHBox2">
+            <JFXButton fx:id="seven" mnemonicParsing="false" text="7" />
+            <JFXButton fx:id="eight" mnemonicParsing="false" text="8" />
+            <JFXButton fx:id="nine" mnemonicParsing="false" text="9" />
+            <JFXButton fx:id="times" mnemonicParsing="false" text="x" />
+        </HBox>
+        <HBox>
+            <JFXButton fx:id="four" mnemonicParsing="false" text="4" />
+            <JFXButton fx:id="five" mnemonicParsing="false" text="5" />
+            <JFXButton fx:id="six" mnemonicParsing="false" text="6" />
+            <JFXButton fx:id="minus" mnemonicParsing="false" text="-" AnchorPane.rightAnchor="0" />
+        </HBox>
+        <HBox fx:id="buttonHBox1">
+            <JFXButton fx:id="one" mnemonicParsing="false" text="1" />
+            <JFXButton fx:id="two" mnemonicParsing="false" text="2" />
+            <JFXButton fx:id="three" mnemonicParsing="false" text="3" />
+            <JFXButton fx:id="plus" mnemonicParsing="false" text="+" />
+        </HBox>
+        <HBox fx:id="buttonHBox0">
+            <JFXButton fx:id="plusMinus" mnemonicParsing="false" text="±" />
+            <JFXButton fx:id="zero" mnemonicParsing="false" text="0" />
+            <JFXButton fx:id="dot" mnemonicParsing="false" text="." />
+            <JFXButton fx:id="equal" mnemonicParsing="false" text="=" />
+        </HBox>
+    </VBox>
 </AnchorPane>

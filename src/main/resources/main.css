@@ -1,0 +1,12 @@
+.jfx-button {
+    -jfx-button-type: FLAT;
+    -fx-background-color: #060606;
+    -fx-text-fill: white;
+    -fx-font-size: 36;
+    -fx-max-width: Infinity;
+    -fx-max-height: Infinity;
+}
+
+.label {
+    -fx-text-fill: white;
+}

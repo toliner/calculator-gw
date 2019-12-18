@@ -24,3 +24,7 @@ javafx {
     version = "11.0.2"
     modules = listOf("javafx.controls", "javafx.fxml")
 }
+
+application {
+    mainClassName = "dev.toliner.calcgw.CalculatorApplication"
+}
