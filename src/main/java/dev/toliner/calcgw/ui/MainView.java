@@ -1,4 +1,4 @@
-package dev.toliner.calcgw;
+package dev.toliner.calcgw.ui;
 
 import com.jfoenix.controls.JFXButton;
 import javafx.fxml.FXML;

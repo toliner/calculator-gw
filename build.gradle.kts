@@ -13,6 +13,7 @@ repositories {
 
 dependencies {
     implementation("com.jfoenix:jfoenix:9.0.9")
+    implementation("org.jetbrains:annotations:18.0.0")
     testCompile("junit", "junit", "4.12")
 }
 
