@@ -21,6 +21,12 @@ configure<JavaPluginConvention> {
     sourceCompatibility = JavaVersion.VERSION_11
 }
 
+tasks {
+    withType<JavaCompile> {
+        options.encoding = "utf-8"
+    }
+}
+
 javafx {
     version = "11.0.2"
     modules = listOf("javafx.controls", "javafx.fxml")
