@@ -3,10 +3,19 @@ package dev.toliner.calcgw.core.values;
 import dev.toliner.calcgw.core.Value;
 import org.jetbrains.annotations.NotNull;
 
-// 分数
+/**
+ * 分数
+ */
 public class FractionValue implements Value {
 
-    public final int denominator, numerator;
+    /**
+     * 分母
+     */
+    public final int denominator;
+    /**
+     * 分子
+     */
+    public final int numerator;
 
     public FractionValue(int numerator, int denominator) {
         this.numerator = numerator;
@@ -21,5 +30,21 @@ public class FractionValue implements Value {
     @Override
     public @NotNull String asString() {
         return numerator + "/" + denominator;
+    }
+
+    private static int gcd(int a, int b) {
+        if (a < b) return gcd(b, a);
+        if (b == 0) return b;
+        return gcd(b, b % a);
+    }
+
+    public Value optimized() {
+        int gcd = gcd(denominator, numerator);
+        int up = denominator / gcd, down = numerator / gcd;
+        if (down == 1) {
+            return new IntegerValue(up);
+        } else {
+            return new FractionValue(up, down);
+        }
     }
 }

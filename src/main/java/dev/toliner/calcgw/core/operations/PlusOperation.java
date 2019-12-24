@@ -12,52 +12,55 @@ public abstract class PlusOperation implements Operation {
 
     @NotNull
     @Contract("_, _ -> new")
-    public static PlusOperation of(Expression first, Expression second) {
+    public static PlusOperation of(@NotNull Expression first, @NotNull Expression second) {
         return new Lazy(first, second);
     }
 
     private static final class Integer extends PlusOperation {
         private IntegerValue first, second;
 
-        public Integer(IntegerValue first, IntegerValue second) {
+        public Integer(@NotNull IntegerValue first, @NotNull IntegerValue second) {
             this.first = first;
             this.second = second;
         }
 
         @Override
         public @NotNull Value eval() {
-            return null;
+            return new IntegerValue(first.value + second.value);
         }
 
         @Override
         public @NotNull String asString() {
-            return null;
+            return first.asString() + "+" + second.asString();
         }
     }
 
     private static final class Fraction extends PlusOperation {
         private FractionValue first, second;
 
-        public Fraction(FractionValue first, FractionValue second) {
+        public Fraction(@NotNull FractionValue first, @NotNull FractionValue second) {
             this.first = first;
             this.second = second;
         }
 
         @Override
         public @NotNull Value eval() {
-            return null;
+            return new FractionValue(
+                    first.numerator * second.denominator + first.denominator * second.numerator,
+                    first.denominator * second.denominator
+            ).optimized();
         }
 
         @Override
         public @NotNull String asString() {
-            return null;
+            return first.asString() + "+" + second.asString();
         }
     }
 
     private static final class Lazy extends PlusOperation {
         private final Expression first, second;
 
-        public Lazy(Expression first, Expression second) {
+        public Lazy(@NotNull Expression first, @NotNull Expression second) {
             this.first = first;
             this.second = second;
         }
