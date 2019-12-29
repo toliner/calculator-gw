@@ -6,4 +6,7 @@ public interface Operation extends Expression {
     @Override
     @NotNull
     Value eval();
+
+    @NotNull
+    Operator getOperator();
 }

@@ -14,7 +14,7 @@
           AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
         <Label fx:id="answerLabel" alignment="CENTER_RIGHT" VBox.vgrow="ALWAYS">
             <font>
-                <Font size="72.0"/>
+                <Font size="64.0"/>
             </font>
             <VBox.margin>
                 <Insets bottom="20.0" top="20.0"/>
@@ -23,49 +23,50 @@
         <GridPane fx:id="baseGrid" VBox.vgrow="ALWAYS">
             <!-- Number Buttons -->
             <JFXButton GridPane.columnIndex="1" GridPane.rowIndex="4" GridPane.vgrow="ALWAYS" GridPane.hgrow="ALWAYS"
-                       text="0" fx:id="zero" onMouseClicked="#onNumberClicked"/>
+                       text="0" fx:id="zero" onMouseClicked="#onButtonClicked"/>
             <JFXButton GridPane.columnIndex="0" GridPane.rowIndex="3" GridPane.vgrow="ALWAYS" GridPane.hgrow="ALWAYS"
-                       text="1" fx:id="one" onMouseClicked="#onNumberClicked"/>
+                       text="1" fx:id="one" onMouseClicked="#onButtonClicked"/>
             <JFXButton GridPane.columnIndex="1" GridPane.rowIndex="3" GridPane.vgrow="ALWAYS" GridPane.hgrow="ALWAYS"
-                       text="2" fx:id="two" onMouseClicked="#onNumberClicked"/>
+                       text="2" fx:id="two" onMouseClicked="#onButtonClicked"/>
             <JFXButton GridPane.columnIndex="2" GridPane.rowIndex="3" GridPane.vgrow="ALWAYS" GridPane.hgrow="ALWAYS"
-                       text="3" fx:id="three" onMouseClicked="#onNumberClicked"/>
+                       text="3" fx:id="three" onMouseClicked="#onButtonClicked"/>
             <JFXButton GridPane.columnIndex="0" GridPane.rowIndex="2" GridPane.vgrow="ALWAYS" GridPane.hgrow="ALWAYS"
-                       text="4" fx:id="four" onMouseClicked="#onNumberClicked"/>
+                       text="4" fx:id="four" onMouseClicked="#onButtonClicked"/>
             <JFXButton GridPane.columnIndex="1" GridPane.rowIndex="2" GridPane.vgrow="ALWAYS" GridPane.hgrow="ALWAYS"
-                       text="5" fx:id="five" onMouseClicked="#onNumberClicked"/>
+                       text="5" fx:id="five" onMouseClicked="#onButtonClicked"/>
             <JFXButton GridPane.columnIndex="2" GridPane.rowIndex="2" GridPane.vgrow="ALWAYS" GridPane.hgrow="ALWAYS"
-                       text="6" fx:id="six" onMouseClicked="#onNumberClicked"/>
+                       text="6" fx:id="six" onMouseClicked="#onButtonClicked"/>
             <JFXButton GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS" GridPane.hgrow="ALWAYS"
-                       text="7" fx:id="seven" onMouseClicked="#onNumberClicked"/>
+                       text="7" fx:id="seven" onMouseClicked="#onButtonClicked"/>
             <JFXButton GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS" GridPane.hgrow="ALWAYS"
-                       text="8" fx:id="eight" onMouseClicked="#onNumberClicked"/>
+                       text="8" fx:id="eight" onMouseClicked="#onButtonClicked"/>
             <JFXButton GridPane.columnIndex="2" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS" GridPane.hgrow="ALWAYS"
-                       text="9" fx:id="nine" onMouseClicked="#onNumberClicked"/>
+                       text="9" fx:id="nine" onMouseClicked="#onButtonClicked"/>
 
             <!-- Operator Buttons -->
             <JFXButton GridPane.columnIndex="3" GridPane.rowIndex="4" GridPane.vgrow="ALWAYS" GridPane.hgrow="ALWAYS"
-                       text="+" fx:id="plus"/>
+                       text="+" fx:id="plus" onMouseClicked="#onButtonClicked"/>
             <JFXButton GridPane.columnIndex="3" GridPane.rowIndex="3" GridPane.vgrow="ALWAYS" GridPane.hgrow="ALWAYS"
-                       text="-" fx:id="minus"/>
+                       text="-" fx:id="minus" onMouseClicked="#onButtonClicked"/>
             <JFXButton GridPane.columnIndex="3" GridPane.rowIndex="2" GridPane.vgrow="ALWAYS" GridPane.hgrow="ALWAYS"
-                       text="x" fx:id="times"/>
+                       text="x" fx:id="times" onMouseClicked="#onButtonClicked"/>
             <JFXButton GridPane.columnIndex="3" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS" GridPane.hgrow="ALWAYS"
-                       text="/" fx:id="divide"/>
-
-            <JFXButton GridPane.columnIndex="2" GridPane.rowIndex="4" GridPane.vgrow="ALWAYS" GridPane.hgrow="ALWAYS"
-                       text="=" fx:id="equal"/>
+                       text="/" fx:id="divide" onMouseClicked="#onButtonClicked"/>
 
             <JFXButton GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.vgrow="ALWAYS" GridPane.hgrow="ALWAYS"
-                       text="(" fx:id="bracketBegin"/>
+                       text="(" fx:id="bracketBegin" onMouseClicked="#onButtonClicked"/>
             <JFXButton GridPane.columnIndex="1" GridPane.rowIndex="0" GridPane.vgrow="ALWAYS" GridPane.hgrow="ALWAYS"
-                       text=")" fx:id="bracketEnd"/>
-            <JFXButton GridPane.columnIndex="2" GridPane.rowIndex="0" GridPane.vgrow="ALWAYS" GridPane.hgrow="ALWAYS"
-                       text="C" fx:id="clear"/>
-            <JFXButton GridPane.columnIndex="3" GridPane.rowIndex="0" GridPane.vgrow="ALWAYS" GridPane.hgrow="ALWAYS"
-                       text="⌫" fx:id="delete"/>
+                       text=")" fx:id="bracketEnd" onMouseClicked="#onButtonClicked"/>
             <JFXButton GridPane.columnIndex="0" GridPane.rowIndex="4" GridPane.vgrow="ALWAYS" GridPane.hgrow="ALWAYS"
-                       text="+/-" fx:id="plusMinus"/>
+                       text="^" fx:id="power" onMouseClicked="#onButtonClicked"/>
+
+            <JFXButton GridPane.columnIndex="2" GridPane.rowIndex="4" GridPane.vgrow="ALWAYS" GridPane.hgrow="ALWAYS"
+                       text="=" fx:id="equal" onMouseClicked="#onEqualClicked"/>
+
+            <JFXButton GridPane.columnIndex="2" GridPane.rowIndex="0" GridPane.vgrow="ALWAYS" GridPane.hgrow="ALWAYS"
+                       text="C" fx:id="clear" onMouseClicked="#onClearClicked"/>
+            <JFXButton GridPane.columnIndex="3" GridPane.rowIndex="0" GridPane.vgrow="ALWAYS" GridPane.hgrow="ALWAYS"
+                       text="⌫" fx:id="delete" onMouseClicked="#onDeleteClicked"/>
         </GridPane>
     </VBox>
 </AnchorPane>

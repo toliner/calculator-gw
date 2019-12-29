@@ -1,42 +1,49 @@
 package dev.toliner.calcgw.core;
 
-import dev.toliner.calcgw.core.values.IntegerValue;
-
-import java.util.Deque;
-import java.util.LinkedList;
+import javafx.beans.property.StringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
+import javafx.collections.ObservableList;
 
 public class Processor {
 
     private static final Processor instance = new Processor();
-    private final Deque<Object> pushedKeys = new LinkedList<>();
 
-    private Processor() {
-    }
+    private ObservableList<Token> tokenList = FXCollections.observableArrayList();
 
     public static Processor getInstance() {
         return instance;
     }
 
-    public void addKeyPressed(Object obj) {
-        if (obj instanceof Integer) {
-            pushedKeys.add(obj);
-        } else if (obj instanceof String) {
-            StringBuilder num = new StringBuilder();
-            while (pushedKeys.peek() instanceof Integer) {
-                num.append(pushedKeys.pop());
+    private StringProperty labelProperty;
+
+    private Processor() {
+        tokenList.addListener((ListChangeListener<? super Token>) (change) -> {
+            StringBuilder builder = new StringBuilder();
+            for (Token token : change.getList()) {
+                builder.append(token.displayText);
             }
-            pushedKeys.add(new IntegerValue(Integer.parseInt(num.reverse().toString())));
-            pushedKeys.add(obj);
+            labelProperty.setValue(builder.toString());
+        });
+    }
+
+    public void setLabelProperty(StringProperty property) {
+        if (labelProperty == null) {
+            labelProperty = property;
         } else {
-            throw new IllegalArgumentException("obj must be able to convert to Expression");
+            throw new IllegalStateException("Single assign");
         }
     }
 
-    public void eval() {
-
+    public void addToken(Token token) {
+        tokenList.add(token);
     }
 
-    public Expression parse() {
-        throw new RuntimeException();
+    public void removeLastToken() {
+        tokenList.remove(tokenList.size() - 1);
+    }
+
+    public void clearTokenList() {
+        tokenList.clear();
     }
 }

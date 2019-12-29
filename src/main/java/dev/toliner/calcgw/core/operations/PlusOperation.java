@@ -2,6 +2,7 @@ package dev.toliner.calcgw.core.operations;
 
 import dev.toliner.calcgw.core.Expression;
 import dev.toliner.calcgw.core.Operation;
+import dev.toliner.calcgw.core.Operator;
 import dev.toliner.calcgw.core.Value;
 import dev.toliner.calcgw.core.values.FractionValue;
 import dev.toliner.calcgw.core.values.IntegerValue;
@@ -14,6 +15,11 @@ public abstract class PlusOperation implements Operation {
     @Contract("_, _ -> new")
     public static PlusOperation of(@NotNull Expression first, @NotNull Expression second) {
         return new Lazy(first, second);
+    }
+
+    @Override
+    public @NotNull Operator getOperator() {
+        return Operator.PLUS;
     }
 
     private static final class Integer extends PlusOperation {

@@ -2,6 +2,7 @@ package dev.toliner.calcgw.core.operations;
 
 import dev.toliner.calcgw.core.Expression;
 import dev.toliner.calcgw.core.Operation;
+import dev.toliner.calcgw.core.Operator;
 import dev.toliner.calcgw.core.Value;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
@@ -28,6 +29,11 @@ public class MinusOperation implements Operation {
 
     @Override
     public @NotNull String asString() {
+        return null;
+    }
+
+    @Override
+    public @NotNull Operator getOperator() {
         return null;
     }
 }
