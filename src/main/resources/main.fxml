@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml"
+            xmlns="http://javafx.com/javafx"
+            fx:controller="dev.toliner.calcgw.ui.MainView"
+            prefHeight="600.0" prefWidth="480.0"
+            style="-fx-background-color: #1F1F1F;">
+    <VBox fx:id="baseVBox" alignment="TOP_RIGHT" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0"
+          AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
+        <Label fx:id="answerLabel" alignment="CENTER_RIGHT" VBox.vgrow="ALWAYS">
+            <font>
+                <Font size="72.0"/>
+            </font>
+            <VBox.margin>
+                <Insets bottom="20.0" top="20.0"/>
+            </VBox.margin>
+        </Label>
+        <GridPane fx:id="baseGrid" VBox.vgrow="ALWAYS">
+            <!-- Number Buttons -->
+            <JFXButton GridPane.columnIndex="1" GridPane.rowIndex="4" GridPane.vgrow="ALWAYS" GridPane.hgrow="ALWAYS"
+                       text="0" fx:id="zero" onMouseClicked="#onNumberClicked"/>
+            <JFXButton GridPane.columnIndex="0" GridPane.rowIndex="3" GridPane.vgrow="ALWAYS" GridPane.hgrow="ALWAYS"
+                       text="1" fx:id="one" onMouseClicked="#onNumberClicked"/>
+            <JFXButton GridPane.columnIndex="1" GridPane.rowIndex="3" GridPane.vgrow="ALWAYS" GridPane.hgrow="ALWAYS"
+                       text="2" fx:id="two" onMouseClicked="#onNumberClicked"/>
+            <JFXButton GridPane.columnIndex="2" GridPane.rowIndex="3" GridPane.vgrow="ALWAYS" GridPane.hgrow="ALWAYS"
+                       text="3" fx:id="three" onMouseClicked="#onNumberClicked"/>
+            <JFXButton GridPane.columnIndex="0" GridPane.rowIndex="2" GridPane.vgrow="ALWAYS" GridPane.hgrow="ALWAYS"
+                       text="4" fx:id="four" onMouseClicked="#onNumberClicked"/>
+            <JFXButton GridPane.columnIndex="1" GridPane.rowIndex="2" GridPane.vgrow="ALWAYS" GridPane.hgrow="ALWAYS"
+                       text="5" fx:id="five" onMouseClicked="#onNumberClicked"/>
+            <JFXButton GridPane.columnIndex="2" GridPane.rowIndex="2" GridPane.vgrow="ALWAYS" GridPane.hgrow="ALWAYS"
+                       text="6" fx:id="six" onMouseClicked="#onNumberClicked"/>
+            <JFXButton GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS" GridPane.hgrow="ALWAYS"
+                       text="7" fx:id="seven" onMouseClicked="#onNumberClicked"/>
+            <JFXButton GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS" GridPane.hgrow="ALWAYS"
+                       text="8" fx:id="eight" onMouseClicked="#onNumberClicked"/>
+            <JFXButton GridPane.columnIndex="2" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS" GridPane.hgrow="ALWAYS"
+                       text="9" fx:id="nine" onMouseClicked="#onNumberClicked"/>
+
+            <!-- Operator Buttons -->
+            <JFXButton GridPane.columnIndex="3" GridPane.rowIndex="4" GridPane.vgrow="ALWAYS" GridPane.hgrow="ALWAYS"
+                       text="+" fx:id="plus"/>
+            <JFXButton GridPane.columnIndex="3" GridPane.rowIndex="3" GridPane.vgrow="ALWAYS" GridPane.hgrow="ALWAYS"
+                       text="-" fx:id="minus"/>
+            <JFXButton GridPane.columnIndex="3" GridPane.rowIndex="2" GridPane.vgrow="ALWAYS" GridPane.hgrow="ALWAYS"
+                       text="x" fx:id="times"/>
+            <JFXButton GridPane.columnIndex="3" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS" GridPane.hgrow="ALWAYS"
+                       text="/" fx:id="divide"/>
+
+            <JFXButton GridPane.columnIndex="2" GridPane.rowIndex="4" GridPane.vgrow="ALWAYS" GridPane.hgrow="ALWAYS"
+                       text="=" fx:id="equal"/>
+
+            <JFXButton GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.vgrow="ALWAYS" GridPane.hgrow="ALWAYS"
+                       text="(" fx:id="bracketBegin"/>
+            <JFXButton GridPane.columnIndex="1" GridPane.rowIndex="0" GridPane.vgrow="ALWAYS" GridPane.hgrow="ALWAYS"
+                       text=")" fx:id="bracketEnd"/>
+            <JFXButton GridPane.columnIndex="2" GridPane.rowIndex="0" GridPane.vgrow="ALWAYS" GridPane.hgrow="ALWAYS"
+                       text="C" fx:id="clear"/>
+            <JFXButton GridPane.columnIndex="3" GridPane.rowIndex="0" GridPane.vgrow="ALWAYS" GridPane.hgrow="ALWAYS"
+                       text="⌫" fx:id="delete"/>
+            <JFXButton GridPane.columnIndex="0" GridPane.rowIndex="4" GridPane.vgrow="ALWAYS" GridPane.hgrow="ALWAYS"
+                       text="+/-" fx:id="plusMinus"/>
+        </GridPane>
+    </VBox>
+</AnchorPane>
