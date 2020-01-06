@@ -84,7 +84,7 @@ public abstract class PlusOperation implements Operation {
                 var firstResult = (Value) first.eval();
                 var secondResult = (Value) second.eval();
                 if (firstResult instanceof IntegerValue && secondResult instanceof IntegerValue) {
-                    actual = new Integer((IntegerValue) firstResult, (IntegerValue) firstResult);
+                    actual = new Integer((IntegerValue) firstResult, (IntegerValue) secondResult);
                 } else {
                     actual = new Fraction(FractionValue.of(firstResult), FractionValue.of(secondResult));
                 }
