@@ -106,12 +106,12 @@ public class Processor {
      */
     private Deque<Object> convertTokenToRPN() {
         // flash number stackを関数内定義の関数にしたい。ローカル変数管理なのでコピペする羽目になってる。オブジェクト化する？
-        Deque<Integer> numberStack = new LinkedList<>();
+        Deque<Integer> numberQueue = new LinkedList<>();
         Deque<Object> outputQueue = new LinkedList<>();
         Deque<Token> operatorStack = new LinkedList<>();
         for (Token token : tokenList) {
             if (Token.numberTokens.contains(token)) {
-                numberStack.addFirst(Token.getValueOfToken(token));
+                numberQueue.addLast(Token.getValueOfToken(token));
             } else {
                 switch (token) {
                     case PLUS:
@@ -119,10 +119,10 @@ public class Processor {
                     case TIMES:
                     case DIVIDE: {
                         // flash number stack
-                        if (!numberStack.isEmpty()) {
-                            var n = numberStack.removeFirst();
-                            while (!numberStack.isEmpty()) {
-                                n = n * 10 + numberStack.removeFirst();
+                        if (!numberQueue.isEmpty()) {
+                            var n = numberQueue.removeFirst();
+                            while (!numberQueue.isEmpty()) {
+                                n = n * 10 + numberQueue.removeFirst();
                             }
                             outputQueue.addLast(n);
                         }
@@ -136,10 +136,10 @@ public class Processor {
                     }
                     case POWER: {
                         // flash number stack
-                        if (!numberStack.isEmpty()) {
-                            var n = numberStack.removeFirst();
-                            while (!numberStack.isEmpty()) {
-                                n = n * 10 + numberStack.removeFirst();
+                        if (!numberQueue.isEmpty()) {
+                            var n = numberQueue.removeFirst();
+                            while (!numberQueue.isEmpty()) {
+                                n = n * 10 + numberQueue.removeFirst();
                             }
                             outputQueue.addLast(n);
                         }
@@ -156,10 +156,10 @@ public class Processor {
                     }
                     case BRACKET_END: {
                         // flash number stack
-                        if (!numberStack.isEmpty()) {
-                            var n = numberStack.removeFirst();
-                            while (!numberStack.isEmpty()) {
-                                n = n * 10 + numberStack.removeFirst();
+                        if (!numberQueue.isEmpty()) {
+                            var n = numberQueue.removeFirst();
+                            while (!numberQueue.isEmpty()) {
+                                n = n * 10 + numberQueue.removeFirst();
                             }
                             outputQueue.addLast(n);
                         }
@@ -176,10 +176,10 @@ public class Processor {
             }
         }
         // flash number stack
-        if (!numberStack.isEmpty()) {
-            var n = numberStack.removeFirst();
-            while (!numberStack.isEmpty()) {
-                n = n * 10 + numberStack.removeFirst();
+        if (!numberQueue.isEmpty()) {
+            var n = numberQueue.removeFirst();
+            while (!numberQueue.isEmpty()) {
+                n = n * 10 + numberQueue.removeFirst();
             }
             outputQueue.addLast(n);
         }
