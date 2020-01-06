@@ -13,7 +13,6 @@ public class IntegerValue implements Value {
 
     @Override
     public @NotNull String asString() {
-        // ToDo
-        return null;
+        return String.valueOf(value);
     }
 }
