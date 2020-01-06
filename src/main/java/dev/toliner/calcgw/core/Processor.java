@@ -1,5 +1,6 @@
 package dev.toliner.calcgw.core;
 
+import dev.toliner.calcgw.core.operations.PlusOperation;
 import dev.toliner.calcgw.core.values.IntegerValue;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
@@ -45,19 +46,26 @@ public class Processor {
     }
 
     public void removeLastToken() {
-        tokenList.remove(tokenList.size() - 1);
+        if (!tokenList.isEmpty()) {
+            tokenList.remove(tokenList.size() - 1);
+        } else {
+            labelProperty.setValue("");
+        }
     }
 
     public void clearTokenList() {
         tokenList.clear();
+        labelProperty.setValue("");
     }
 
     public void eval() {
-
         try {
             var expression = analyze();
+            var result = expression.eval();
+            tokenList.clear();
+            labelProperty.setValue(result.asString());
         } catch (Exception e) {
-
+            labelProperty.setValue("ERROR: " + e.getMessage());
         }
     }
 
@@ -65,8 +73,28 @@ public class Processor {
     private Expression analyze() {
         var rpn = convertTokenToRPN();
 
-
-        throw new RuntimeException();
+        Deque<Expression> stack = new LinkedList<>();
+        for (Object o : rpn) {
+            if (o instanceof Integer) {
+                stack.addFirst(new IntegerValue((Integer) o));
+            } else {
+                Operator op = (Operator) o;
+                Expression exp;
+                switch (op) {
+                    case PLUS:
+                        exp = PlusOperation.of(stack.removeFirst(), stack.removeFirst());
+                        break;
+                    case MINUS:
+                    case TIMES:
+                    case DIVIDE:
+                    case POWER:
+                    default:
+                        throw new RuntimeException("TODO");
+                }
+                stack.addFirst(exp);
+            }
+        }
+        return stack.getFirst();
     }
 
     /**
@@ -77,6 +105,7 @@ public class Processor {
      * @throws IllegalSyntaxException 構文に異常があった時
      */
     private Deque<Object> convertTokenToRPN() {
+        // flash number stackを関数内定義の関数にしたい。ローカル変数管理なのでコピペする羽目になってる。オブジェクト化する？
         Deque<Integer> numberStack = new LinkedList<>();
         Deque<Object> outputQueue = new LinkedList<>();
         Deque<Token> operatorStack = new LinkedList<>();
@@ -84,24 +113,36 @@ public class Processor {
             if (Token.numberTokens.contains(token)) {
                 numberStack.addFirst(Token.getValueOfToken(token));
             } else {
-                var n = numberStack.removeFirst();
-                while (!numberStack.isEmpty()) {
-                    n = n * 10 + numberStack.removeFirst();
-                }
-                outputQueue.addLast(new IntegerValue(n));
                 switch (token) {
                     case PLUS:
                     case MINUS:
                     case TIMES:
                     case DIVIDE: {
+                        // flash number stack
+                        if (!numberStack.isEmpty()) {
+                            var n = numberStack.removeFirst();
+                            while (!numberStack.isEmpty()) {
+                                n = n * 10 + numberStack.removeFirst();
+                            }
+                            outputQueue.addLast(n);
+                        }
                         var op = Operator.fromToken(token);
-                        while (!operatorStack.isEmpty() && op.priority <= Operator.fromToken(operatorStack.getFirst()).priority) {
+                        // 本来ならoperatorStack.getFirst()がOperatorである事の確認をすべき。
+                        while (!operatorStack.isEmpty() && operatorStack.getFirst() != Token.BRACKET_BEGIN && op.priority <= Operator.fromToken(operatorStack.getFirst()).priority) {
                             outputQueue.addLast(Operator.fromToken(operatorStack.removeFirst()));
                         }
                         operatorStack.addFirst(token);
                         break;
                     }
                     case POWER: {
+                        // flash number stack
+                        if (!numberStack.isEmpty()) {
+                            var n = numberStack.removeFirst();
+                            while (!numberStack.isEmpty()) {
+                                n = n * 10 + numberStack.removeFirst();
+                            }
+                            outputQueue.addLast(n);
+                        }
                         var op = Operator.fromToken(token);
                         while (!operatorStack.isEmpty() && op.priority < Operator.fromToken(operatorStack.getFirst()).priority) {
                             outputQueue.addLast(Operator.fromToken(operatorStack.removeFirst()));
@@ -111,19 +152,38 @@ public class Processor {
                     }
                     case BRACKET_BEGIN: {
                         operatorStack.addFirst(token);
+                        break;
                     }
                     case BRACKET_END: {
+                        // flash number stack
+                        if (!numberStack.isEmpty()) {
+                            var n = numberStack.removeFirst();
+                            while (!numberStack.isEmpty()) {
+                                n = n * 10 + numberStack.removeFirst();
+                            }
+                            outputQueue.addLast(n);
+                        }
                         var op = operatorStack.removeFirst();
-                        while (op == Token.BRACKET_BEGIN) {
+                        while (op != Token.BRACKET_BEGIN) {
                             outputQueue.addLast(Operator.fromToken(op));
                             // 左括弧が出るまではoperatorが積まれているはず
                             // そうでなければエラー
                             op = operatorStack.removeFirst();
                         }
+                        break;
                     }
                 }
             }
         }
+        // flash number stack
+        if (!numberStack.isEmpty()) {
+            var n = numberStack.removeFirst();
+            while (!numberStack.isEmpty()) {
+                n = n * 10 + numberStack.removeFirst();
+            }
+            outputQueue.addLast(n);
+        }
+        // flash operator stack
         while (!operatorStack.isEmpty()) {
             var op = operatorStack.removeFirst();
             if (op == Token.BRACKET_BEGIN || op == Token.BRACKET_END) {

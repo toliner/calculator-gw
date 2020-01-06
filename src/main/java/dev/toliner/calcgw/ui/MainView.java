@@ -101,6 +101,6 @@ public class MainView {
 
     @FXML
     private void onEqualClicked(@NotNull MouseEvent mouseEvent) {
-
+        Processor.getInstance().eval();
     }
 }
