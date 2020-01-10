@@ -31,7 +31,7 @@ public abstract class DivideOperation implements Operation {
 
         @Override
         public @NotNull Value eval() {
-            return new IntegerValue(first.value / second.value);
+            return new FractionValue(first.value, second.value).eval();
         }
 
         @Override

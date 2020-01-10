@@ -34,13 +34,13 @@ public class FractionValue implements Value {
 
     private static int gcd(int a, int b) {
         if (a < b) return gcd(b, a);
-        if (b == 0) return b;
-        return gcd(b, b % a);
+        if (b == 0) return a;
+        return gcd(b, a % b);
     }
 
     public Value optimized() {
         int gcd = gcd(denominator, numerator);
-        int up = denominator / gcd, down = numerator / gcd;
+        int up = numerator / gcd, down = denominator / gcd;
         if (down == 1) {
             return new IntegerValue(up);
         } else {

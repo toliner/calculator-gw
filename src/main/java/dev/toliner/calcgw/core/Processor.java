@@ -84,18 +84,30 @@ public class Processor {
                 Operator op = (Operator) o;
                 Expression exp;
                 switch (op) {
-                    case PLUS:
-                        exp = PlusOperation.of(stack.removeFirst(), stack.removeFirst());
+                    case PLUS: {
+                        var second = stack.removeFirst();
+                        var first = stack.removeFirst();
+                        exp = PlusOperation.of(first, second);
                         break;
-                    case MINUS:
-                        exp = MinusOperation.of(stack.removeFirst(), stack.removeFirst());
+                    }
+                    case MINUS: {
+                        var second = stack.removeFirst();
+                        var first = stack.removeFirst();
+                        exp = MinusOperation.of(first, second);
                         break;
-                    case TIMES:
-                        exp = TimesOperation.of(stack.removeFirst(), stack.removeFirst());
+                    }
+                    case TIMES: {
+                        var second = stack.removeFirst();
+                        var first = stack.removeFirst();
+                        exp = TimesOperation.of(first, second);
                         break;
-                    case DIVIDE:
-                        exp = DivideOperation.of(stack.removeFirst(), stack.removeFirst());
+                    }
+                    case DIVIDE: {
+                        var second = stack.removeFirst();
+                        var first = stack.removeFirst();
+                        exp = DivideOperation.of(first, second);
                         break;
+                    }
                     case POWER:
                     default:
                         throw new RuntimeException("TODO");
