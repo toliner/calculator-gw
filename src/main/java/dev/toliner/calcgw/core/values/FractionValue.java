@@ -47,4 +47,9 @@ public class FractionValue implements Value {
             return new FractionValue(up, down);
         }
     }
+
+    @Override
+    public @NotNull Value eval() {
+        return optimized();
+    }
 }

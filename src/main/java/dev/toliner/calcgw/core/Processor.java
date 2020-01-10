@@ -1,6 +1,9 @@
 package dev.toliner.calcgw.core;
 
+import dev.toliner.calcgw.core.operations.DivideOperation;
+import dev.toliner.calcgw.core.operations.MinusOperation;
 import dev.toliner.calcgw.core.operations.PlusOperation;
+import dev.toliner.calcgw.core.operations.TimesOperation;
 import dev.toliner.calcgw.core.values.IntegerValue;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
@@ -85,8 +88,14 @@ public class Processor {
                         exp = PlusOperation.of(stack.removeFirst(), stack.removeFirst());
                         break;
                     case MINUS:
+                        exp = MinusOperation.of(stack.removeFirst(), stack.removeFirst());
+                        break;
                     case TIMES:
+                        exp = TimesOperation.of(stack.removeFirst(), stack.removeFirst());
+                        break;
                     case DIVIDE:
+                        exp = DivideOperation.of(stack.removeFirst(), stack.removeFirst());
+                        break;
                     case POWER:
                     default:
                         throw new RuntimeException("TODO");

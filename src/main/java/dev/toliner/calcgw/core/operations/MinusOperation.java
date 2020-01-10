@@ -32,12 +32,12 @@ public abstract class MinusOperation implements Operation {
 
         @Override
         public @NotNull Value eval() {
-            return new IntegerValue(first.value + second.value);
+            return new IntegerValue(first.value - second.value);
         }
 
         @Override
         public @NotNull String asString() {
-            return first.asString() + "+" + second.asString();
+            return first.asString() + "-" + second.asString();
         }
     }
 
